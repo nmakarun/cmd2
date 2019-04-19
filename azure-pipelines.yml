@@ -42,7 +42,14 @@ jobs:
     displayName: 'Upgrade pip and setuptools'
     continueOnError: false
 
-    # TODO: Consider adding a lint test to use pycodestyle, flake8, or pylint, to check code style conventions
+    # Pylint check on python code
+  - script: |
+      pip install pylint pylint-fail-under
+      displayName: 'Installing Pylint and Pylint Under'
+      
+  - script: |
+      pylint-fail-under --fail_under 5.0 package_name.py
+      displayName: 'Checking for Error score less than 5.0'
 
     # Test - test with pytest, collect coverage metrics with pytest-cov, and publish these metrics to codecov.io
   - script: |
